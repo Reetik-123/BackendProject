@@ -3,6 +3,8 @@ import { Button } from "@/components/ui/button";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { User } from "lucide-react";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 const Navbar = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -54,6 +56,16 @@ const Navbar = () => {
               <Link to="/history">
                 <Button variant="hero" size="sm" className="text-sm">Dashboard</Button>
               </Link>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Link to="/profile" className="ml-1 flex items-center justify-center w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-zinc-700 transition-all text-zinc-300 hover:text-white">
+                    <User className="w-4 h-4" />
+                  </Link>
+                </TooltipTrigger>
+                <TooltipContent sideOffset={8}>
+                  <p>{user.name}</p>
+                </TooltipContent>
+              </Tooltip>
             </>
           ) : (
             <>
