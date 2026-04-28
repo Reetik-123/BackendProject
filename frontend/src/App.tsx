@@ -10,6 +10,7 @@ import Register from "./pages/Register";
 import InterviewPage from "./pages/InterviewPage";
 import InterviewHistory from "./pages/InterviewHistory";
 import InterviewReport from "./pages/InterviewReport";
+import ProfilePage from "./pages/ProfilePage";
 import { AuthProvider, useAuth } from "./context/AuthContext";
 import { SocketProvider } from "./context/SocketContext";
 
@@ -39,6 +40,7 @@ const App = () => (
               <Route path="/interview" element={<ProtectedRoute><InterviewPage /></ProtectedRoute>} />
               <Route path="/history" element={<ProtectedRoute><InterviewHistory /></ProtectedRoute>} />
               <Route path="/report/:id" element={<ProtectedRoute><InterviewReport /></ProtectedRoute>} />
+              <Route path="/profile" element={<ProtectedRoute><ProfilePage /></ProtectedRoute>} />
               
               {/* Catch-All */}
               <Route path="*" element={<NotFound />} />
