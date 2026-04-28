@@ -4,6 +4,7 @@ import { ArrowRight, Play } from "lucide-react";
 import Spline from '@splinetool/react-spline';
 import { Link } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { useState } from "react";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -18,6 +19,8 @@ const heroTimeline = {
 
 const HeroSection = () => {
   const { user } = useAuth();
+  const [isDemoOpen, setIsDemoOpen] = useState(false);
+  
   return (
     <section className="relative min-h-screen flex items-center section-padding overflow-hidden">
       {/* Animated background glows */}
@@ -95,10 +98,10 @@ const HeroSection = () => {
 
             {/* CTAs with hover animations */}
             <motion.div {...heroTimeline.ctas} className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4">
-              <Link to={user ? "/interview" : "/register"}>
+              <Link to="/interview">
                 <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
                   <Button variant="hero" size="lg" className="text-base px-8 py-6">
-                    Start Practicing Free
+                    Get Started (Free Trial)
                     <motion.span
                       className="inline-block ml-1"
                       animate={{ x: [0, 4, 0] }}
@@ -110,7 +113,7 @@ const HeroSection = () => {
                 </motion.div>
               </Link>
               <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.97 }}>
-                <Button variant="heroOutline" size="lg" className="text-base px-8 py-6">
+                <Button variant="heroOutline" size="lg" className="text-base px-8 py-6" onClick={() => setIsDemoOpen(true)}>
                   <Play className="mr-1" />
                   Watch Demo
                 </Button>
@@ -136,6 +139,38 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+
+      {/* Demo Video Modal */}
+      {isDemoOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6">
+          <div 
+            className="absolute inset-0 bg-background/80 backdrop-blur-sm"
+            onClick={() => setIsDemoOpen(false)}
+          />
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            className="relative w-full max-w-4xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl z-10 border border-primary/20"
+          >
+            <button
+              onClick={() => setIsDemoOpen(false)}
+              className="absolute top-4 right-4 z-20 p-2 bg-black/50 hover:bg-black/80 rounded-full text-white transition-colors"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+            </button>
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1"
+              title="InterviewAI Demo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 };

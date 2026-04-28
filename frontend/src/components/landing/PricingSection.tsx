@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Check } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const plans = [
   {
@@ -120,10 +121,12 @@ const PricingSection = () => {
                 ))}
               </motion.ul>
 
-              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
-                <Button variant={plan.highlighted ? "hero" : "heroOutline"} className="w-full">
-                  {plan.cta}
-                </Button>
+              <motion.div whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }} className="w-full">
+                <Link to="/interview" className="w-full block">
+                  <Button variant={plan.highlighted ? "hero" : "heroOutline"} className="w-full">
+                    {plan.cta}
+                  </Button>
+                </Link>
               </motion.div>
             </motion.div>
           ))}
