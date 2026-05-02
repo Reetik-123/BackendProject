@@ -8,7 +8,9 @@ import api from "../../services/api";
 import { Button } from "@/components/ui/button";
 
 interface Step2Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   interviewData: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onFinish: (report: any) => void;
 }
 
@@ -27,6 +29,7 @@ const Step2Interview: React.FC<Step2Props> = ({ interviewData, onFinish }) => {
   const [voiceGender, setVoiceGender] = useState<"male" | "female">("female");
   const [subtitle, setSubtitle] = useState("");
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recognitionRef = useRef<any>(null);
   const answerRef = useRef("");
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -149,12 +152,14 @@ const Step2Interview: React.FC<Step2Props> = ({ interviewData, onFinish }) => {
 
   useEffect(() => {
     if (!("webkitSpeechRecognition" in window)) return;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const SpeechRecognition = (window as any).webkitSpeechRecognition;
     const recognition = new SpeechRecognition();
     recognition.lang = "en-US";
     recognition.continuous = true;
     recognition.interimResults = false;
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     recognition.onresult = (event: any) => {
       const transcript = event.results[event.results.length - 1][0].transcript;
       setAnswer((prev) => prev + " " + transcript);
@@ -167,7 +172,9 @@ const Step2Interview: React.FC<Step2Props> = ({ interviewData, onFinish }) => {
     if (recognitionRef.current && !isAIPlaying) {
       try {
         recognitionRef.current.start();
-      } catch {}
+      } catch (e) {
+        console.error(e);
+      }
     }
   };
 

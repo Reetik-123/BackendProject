@@ -5,6 +5,7 @@ import Step3Report from "../components/interview/Step3Report";
 
 const InterviewPage = () => {
   const [step, setStep] = useState(1);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [interviewData, setInterviewData] = useState<any>(null);
 
   return (
