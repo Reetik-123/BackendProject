@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 
 interface Step1Props {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onStart: (data: any) => void;
 }
 
@@ -46,9 +47,10 @@ const Step1SetUp: React.FC<Step1Props> = ({ onStart }) => {
       setResumeText(data.resumeText || "");
       setAnalysisDone(true);
       toast.success("Resume analyzed successfully!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Resume analysis failed", error);
-      toast.error(error.response?.data?.message || "Failed to analyze resume. Please try again.");
+      const err = error as { response?: { data?: { message?: string } } };
+      toast.error(err.response?.data?.message || "Failed to analyze resume. Please try again.");
     } finally {
       setAnalyzing(false);
     }
@@ -72,9 +74,10 @@ const Step1SetUp: React.FC<Step1Props> = ({ onStart }) => {
 
       onStart(data);
       toast.success("Interview session created successfully!");
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Generation failed", error);
-      toast.error(error.response?.data?.message || "Failed to initialize AI Engine. Please check your API keys or try again.");
+      const err = error as { response?: { data?: { message?: string } } };
+      toast.error(err.response?.data?.message || "Failed to initialize AI Engine. Please check your API keys or try again.");
     } finally {
       setLoading(false);
     }

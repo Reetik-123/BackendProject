@@ -13,7 +13,7 @@ const ProfilePage = () => {
   const userInfo = [
     { label: "Full Name", value: user.name, icon: User },
     { label: "Email Address", value: user.email, icon: Mail },
-    { label: "Available Credits", value: user.credits.toString(), icon: CreditCard },
+    { label: "Available Credits", value: (user.credits ?? 0).toString(), icon: CreditCard },
     { label: "User ID", value: user._id, icon: Hash },
   ];
 
@@ -29,7 +29,7 @@ const ProfilePage = () => {
 
   const item = {
     hidden: { opacity: 0, y: 20 },
-    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
+    show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] as const } },
   };
 
   return (

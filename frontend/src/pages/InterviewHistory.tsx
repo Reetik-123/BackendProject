@@ -5,8 +5,18 @@ import { ArrowLeft, Clock, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
+interface InterviewData {
+  _id: string;
+  status: string;
+  role?: string;
+  experience?: string;
+  mode?: string;
+  finalScore?: number;
+  createdAt: string;
+}
+
 function InterviewHistory() {
-  const [interviews, setInterviews] = useState<any[]>([]);
+  const [interviews, setInterviews] = useState<InterviewData[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 

@@ -5,6 +5,7 @@ import Step3Report from "../components/interview/Step3Report";
 
 function InterviewReport() {
   const { id } = useParams<{ id: string }>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [report, setReport] = useState<any>(null);
 
   useEffect(() => {
